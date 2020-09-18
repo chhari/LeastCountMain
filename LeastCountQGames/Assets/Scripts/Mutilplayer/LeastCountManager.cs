@@ -7,17 +7,18 @@ namespace QGAMES
 {
     [Serializable]
     public class LeastCountManager
-    {        
+    {
         public List<Card> DroppedCards = new List<Card>();
 
         [SerializeField]
         ProtectedData protectedData;
 
 
-        public LeastCountManager(Dictionary<int,MyPlayer> players)
+        public LeastCountManager(Dictionary<int, MyPlayer> players)
         {
             Dictionary<int, List<byte>> temp = new Dictionary<int, List<byte>>();
-            foreach (int i in players.Keys) {
+            foreach (int i in players.Keys)
+            {
                 temp.Add(i, new List<byte>());
             }
             protectedData = new ProtectedData(temp);
@@ -46,7 +47,8 @@ namespace QGAMES
             protectedData.SetPoolOfCards(poolOfCards);
         }
 
-        public void SetPoolOfCards(List<byte> poolOfCards) {
+        public void SetPoolOfCards(List<byte> poolOfCards)
+        {
             protectedData.SetPoolOfCards(poolOfCards);
         }
 
@@ -57,10 +59,13 @@ namespace QGAMES
 
             int numberOfCardsInThePool = poolOfCards.Count;
             int start = numberOfCardsInThePool - 1 - numberOfCards;
-
+            // 1,2,3,4,5,7,10,52,40,30,8,50,15
+            //pool of cards - main card deck
+            //start - start number of card to make pool of 5
+            //numberOfCards - initial card for player
             List<byte> cardValues = poolOfCards.GetRange(start, numberOfCards);
             poolOfCards.RemoveRange(start, numberOfCards);
-            
+
             protectedData.AddCardValuesToPlayer(player.PlayerId, cardValues);
             return cardValues;
 
@@ -84,7 +89,7 @@ namespace QGAMES
             return Constants.POOL_IS_EMPTY;
         }
 
-        
+
 
         public byte FirstDroppedCard()
         {
@@ -104,13 +109,14 @@ namespace QGAMES
             return Constants.POOL_IS_EMPTY;
         }
 
-        public int GetDroppedCardsCount() {
+        public int GetDroppedCardsCount()
+        {
             return protectedData.GetDroppedCards().Count;
         }
 
         public Card DrawDroppedCard()
         {
-            
+
             int numberOfCardsInThePool = DroppedCards.Count;
 
             if (numberOfCardsInThePool > 1)
@@ -119,7 +125,7 @@ namespace QGAMES
                 DroppedCards.Remove(card);
 
                 return card;
-                    
+
             }
 
             return null;
@@ -150,9 +156,10 @@ namespace QGAMES
             protectedData.AddCardToDroppedCards(cardValue);
         }
 
-        public List<byte> GetDroppedCardValues() {
-            return  protectedData.GetDroppedCards();
-           
+        public List<byte> GetDroppedCardValues()
+        {
+            return protectedData.GetDroppedCards();
+
         }
 
         public void RemoveCardValuesFromPlayer(MyPlayer player, List<byte> cardValuesToRemove)
@@ -173,7 +180,7 @@ namespace QGAMES
         public int Winner()
         {
             return protectedData.WinnerPlayerId();
-            
+
         }
 
         public bool GameFinished()
@@ -183,14 +190,16 @@ namespace QGAMES
 
         public void RepositionDroppedCards(CardAnimator cardAnimator)
         {
-            for(int i=0;i< DroppedCards.Count;i++)
+            for (int i = 0; i < DroppedCards.Count; i++)
             {
-                Vector2 newPos =  cardAnimator.droppedCardPosition + Vector2.right * Constants.PLAYER_CARD_POSITION_OFFSET * i;
+                Vector2 newPos = cardAnimator.droppedCardPosition + Vector2.right * Constants.PLAYER_CARD_POSITION_OFFSET * i;
+                Debug.Log("Card drop position Newpos" + newPos);
                 cardAnimator.AddCardAnimation(DroppedCards[i], newPos);
             }
         }
 
-        public void AddToDropCardsReference(Card card) {
+        public void AddToDropCardsReference(Card card)
+        {
             DroppedCards.Add(card);
         }
 
@@ -200,7 +209,7 @@ namespace QGAMES
             DroppedCards.Add(selectedCard);
 
             protectedData.AddCardToDroppedCards(selectedCard.GetValue());
-   
+
             protectedData.RemoveCardValueFromPlayer(player, selectedCard.GetValue());
 
             return true;
@@ -246,7 +255,7 @@ namespace QGAMES
 
                 return setOfFourDictionary;
             }
-            
+
             return null;
         }
 
@@ -258,13 +267,16 @@ namespace QGAMES
         //    return Card.GetRank(playerCards[index]);
         //}
 
-        public MyPlayer getWinner(MyPlayer player1,MyPlayer player2) {
+        public MyPlayer getWinner(MyPlayer player1, MyPlayer player2)
+        {
             List<byte> player1Cards = protectedData.PlayerCards(player1);
             List<byte> player2Cards = protectedData.PlayerCards(player2);
-            if (player1Cards.Sum(x => Convert.ToInt32(x)) > player2Cards.Sum(x => Convert.ToInt32(x))){
+            if (player1Cards.Sum(x => Convert.ToInt32(x)) > player2Cards.Sum(x => Convert.ToInt32(x)))
+            {
                 return player2;
             }
-            else {
+            else
+            {
                 return player1;
             }
 
@@ -278,7 +290,8 @@ namespace QGAMES
             return playerCards[playerCards.Count - 1];
         }
 
-        public int SelectInRandomFromDeckOrDroppedCard() {
+        public int SelectInRandomFromDeckOrDroppedCard()
+        {
             System.Random rand = new System.Random();
 
             if (rand.NextDouble() >= 0.5)
@@ -286,6 +299,6 @@ namespace QGAMES
             else
                 return 1;
         }
-        
+
     }
 }

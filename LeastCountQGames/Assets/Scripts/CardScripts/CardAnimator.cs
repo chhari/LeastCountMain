@@ -70,9 +70,9 @@ namespace QGAMES
 
         CardAnimation currentCardAnimation;
 
-        Vector2 startPosition = new Vector2(1.3f,-0.5f);
+        Vector2 startPosition = new Vector2(1f,1.40f);
 
-        public Vector2 droppedCardPosition = new Vector2(1.3f, 0.5f);
+        public Vector2 droppedCardPosition = new Vector2(1f, 1.2f);
 
         // invoked when all queued card animations have been played
         public UnityEvent OnAllAnimationsFinished = new UnityEvent();
@@ -161,6 +161,7 @@ namespace QGAMES
                 card.SetFaceUp(true);
                 Vector2 temp = droppedCardPosition + Vector2.right * Constants.PLAYER_CARD_POSITION_OFFSET * val;
                 AddCardAnimation(card, temp);
+                Debug.Log("Card drop position in temp" + temp);
         }
 
         public void NextDroppedCardPosition() {

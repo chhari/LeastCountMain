@@ -45,7 +45,7 @@ namespace QGAMES
         Ranks selectedRank;
         Ranks deckOrDroppedCard;
         PlayerMove move;
-        bool intializing=false;
+        bool intializing = false;
 
         public enum GameState
         {
@@ -78,19 +78,23 @@ namespace QGAMES
 
         private void Awake()
         {
+
             foreach (Player p in PhotonNetwork.PlayerList)
             {
                 MyPlayer aplayer = new MyPlayer();
                 aplayer.PlayerId = p.ActorNumber.ToString();
                 aplayer.PlayerName = p.NickName;
-                int pos = CaluclatePositions(p.ActorNumber,PhotonNetwork.LocalPlayer.ActorNumber);
-                if (pos == 0) {
+                Debug.Log("Player p1" + p.ActorNumber);
+                Debug.Log("Player p" + PhotonNetwork.LocalPlayer.ActorNumber);
+                int pos = CaluclatePositions(p.ActorNumber, PhotonNetwork.LocalPlayer.ActorNumber);
+                if (pos == 0)
+                {
                     aplayer.IsLocalPlayer = true;
                     localPlayer = aplayer;
                 }
                 aplayer.Position = PlayerPositions[pos].position;
                 MyPlayers.Add(p.ActorNumber, aplayer);
-                
+                Debug.Log("aplaer position" + aplayer.Position);
             }
             leastCountManager = new LeastCountManager(MyPlayers);
             cardAnimator = FindObjectOfType<CardAnimator>();
@@ -176,7 +180,10 @@ namespace QGAMES
             {
                 leastCountManager.Shuffle();
                 Dictionary<string, byte[]> dict = new Dictionary<string, byte[]>();
-                foreach (MyPlayer oplayer in MyPlayers.Values) {
+
+                //distribute cards to players
+                foreach (MyPlayer oplayer in MyPlayers.Values)
+                {
                     List<byte> playerValues = leastCountManager.DealCardValuesToPlayer(oplayer, Constants.PLAYER_INITIAL_CARDS);
                     dict.Add(oplayer.PlayerId, playerValues.ToArray());
                     if (oplayer.IsLocalPlayer)
@@ -184,14 +191,14 @@ namespace QGAMES
                         currentTurnPlayer = oplayer;
                     }
                 }
-                
+
                 List<byte> poolOfCards = leastCountManager.GetPoolOfCards();
                 byte droppedCardValue = leastCountManager.FirstDroppedCard();
                 List<byte> droppedListValue = new List<byte>();
-                droppedListValue.Add(droppedCardValue);                                
+                droppedListValue.Add(droppedCardValue);
                 dict.Add("poolOfCards", poolOfCards.ToArray());
                 dict.Add(Constants.INITIALIZING_DROPPEDCARD, droppedListValue.ToArray());
- 
+
                 byte evCode = 1; // Custom Event 1: Used as "MoveUnitsToTargetPosition" event
                 //object[] content = new object[] { dict }; // Array contains the target position and the IDs of the selected units
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All }; // You would have to set the Receivers to All in order to receive this event on the local client as well
@@ -203,16 +210,18 @@ namespace QGAMES
                     if (!oplayer.IsLocalPlayer)
                     {
                         cardAnimator.DealDisplayingCards(oplayer, Constants.PLAYER_INITIAL_CARDS);
-                    }else
+                    }
+                    else
                     {
                         cardAnimator.DealDisplayingCardsToLocalPlayer(oplayer, Constants.PLAYER_INITIAL_CARDS);
-                    }                    
+                    }
                 }
                 Card firstDroppedCard = cardAnimator.DropFirstCard(droppedCardValue);
                 leastCountManager.AddToDropCardsReference(firstDroppedCard);
-                
+
             }
-            else {
+            else
+            {
                 if (intializing && !PhotonNetwork.IsMasterClient)
                 {
                     foreach (MyPlayer oplayer in MyPlayers.Values)
@@ -256,7 +265,7 @@ namespace QGAMES
             {
                 SetMessage($"{currentTurnPlayer.PlayerName}'s turn");
             }
-            
+
         }
 
         public void OnTurnConfirmDroppingCard()
@@ -266,15 +275,15 @@ namespace QGAMES
 
         public void OnTurnDrawingCard()
         {
-           
+
         }
 
         public void OnTurnDrawingCardConfirmed()
         {
             move.CurrentActorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
             move.NextActorNumber = PhotonNetwork.LocalPlayer.GetNext().ActorNumber;
-            Dictionary<string, byte> dict2 = new Dictionary<string,byte>();
-            dict2.Add("droppedCards",move.droppedCards);
+            Dictionary<string, byte> dict2 = new Dictionary<string, byte>();
+            dict2.Add("droppedCards", move.droppedCards);
             dict2.Add("drawnCard", move.drawnCard);
             dict2.Add("CurrentActorNumber", Convert.ToByte(move.CurrentActorNumber));
             dict2.Add("NextActorNumber", Convert.ToByte(move.NextActorNumber));
@@ -282,7 +291,8 @@ namespace QGAMES
             {
                 dict2.Add("drawnFromDeckOrDropped", 0);
             }
-            else {
+            else
+            {
                 dict2.Add("drawnFromDeckOrDropped", 1);
 
             }
@@ -293,10 +303,10 @@ namespace QGAMES
 
         }
 
-        public void OnShow() {
+        public void OnShow()
+        {
             gameState = GameState.GameFinished;
             GameFlow();
-
         }
 
 
@@ -340,10 +350,11 @@ namespace QGAMES
 
         public void CheckPlayersBooks()
         {
-            foreach (MyPlayer aplayer in MyPlayers.Values) {
+            foreach (MyPlayer aplayer in MyPlayers.Values)
+            {
                 List<byte> playerCardValues = leastCountManager.PlayerCards(aplayer);
                 aplayer.SetCardValues(playerCardValues);
-            }            
+            }
         }
 
 
@@ -351,14 +362,16 @@ namespace QGAMES
         {
             foreach (MyPlayer aplayer in MyPlayers.Values)
             {
-                if (aplayer.IsLocalPlayer) {
+                if (aplayer.IsLocalPlayer)
+                {
                     aplayer.ShowCardValues();
-                }else
+                }
+                else
                 {
                     aplayer.HideCardValues();
                 }
-                
-            }     
+
+            }
         }
 
         public void SetButtonsText()
@@ -379,8 +392,10 @@ namespace QGAMES
         //****************** User Interaction *********************//
         public void OnCardSelected(Card card)
         {
+            Debug.Log("Card selected");
             if (gameState == GameState.TurnSelectingDroppingCard && currentTurnPlayer == localPlayer)
             {
+                Debug.Log("Card selected gameState TurnSelectingDroppingCard");
                 if (card.OwnerId == currentTurnPlayer.PlayerId)
                 {
                     if (ConditionsForCardSelection(card))
@@ -423,8 +438,8 @@ namespace QGAMES
         }
 
 
-
-        public void OnShowButton() {
+        public void OnShowButton()
+        {
             winner = MyPlayers[leastCountManager.Winner()];
             SetMessage($" {winner.PlayerName} Won the game ");
             gameState = GameState.Show;
@@ -432,7 +447,8 @@ namespace QGAMES
 
         }
 
-        public void OnDrawFromDeckButton() {
+        public void OnDrawFromDeckButton()
+        {
             if (gameState == GameState.TurnConfirmDroppingCard)
             {
                 byte cardValue = leastCountManager.DrawCardValue();
@@ -450,12 +466,14 @@ namespace QGAMES
                 gameState = GameState.TurnDrawingCardConfirmed;
                 GameFlow();
             }
-            else {
+            else
+            {
                 SetMessage("Drop the card and click on confirm card button first");
             }
         }
 
-        public void OnDrawFromLastDroppedButton() {
+        public void OnDrawFromLastDroppedButton()
+        {
             if (gameState == GameState.TurnConfirmDroppingCard)
             {
                 Card card = leastCountManager.DrawDroppedCard();
@@ -467,44 +485,57 @@ namespace QGAMES
                 gameState = GameState.TurnDrawingCardConfirmed;
                 GameFlow();
             }
-            else {
+            else
+            {
                 SetMessage("Drop the card and click on confirm card button first");
             }
 
         }
 
-        //
-        public void ConfirmDropButton() {
-
-            if (selectedCard != null)
+        //to drop card
+        public void ConfirmDropButton()
+        {
+            Debug.Log("Drop button clicked");
+            if (selectedCard != null || selectedCards != null)
             {
-                leastCountManager.DropCardsFromPlayer(currentTurnPlayer, selectedCard);
-                cardAnimator.DropCardAnimation(selectedCard,leastCountManager.GetDroppedCardsCount());
-                currentTurnPlayer.DropCardFromPlayer(cardAnimator, selectedCard.GetValue(), true);
+                foreach (Card selCard in selectedCards)
+                {
+                    leastCountManager.DropCardsFromPlayer(currentTurnPlayer, selCard);
+                    Debug.Log("Card Player" + currentTurnPlayer + "," + selCard);
+                    cardAnimator.DropCardAnimation(selectedCard, leastCountManager.GetDroppedCardsCount());
+                    currentTurnPlayer.DropCardFromPlayer(cardAnimator, selectedCard.GetValue(), true);
+                }
                 leastCountManager.RepositionDroppedCards(cardAnimator);
                 move.droppedCards = selectedCard.GetValue();
                 gameState = GameState.TurnConfirmDroppingCard;
+                Debug.Log("Card Droped");
+                Debug.Log("Card Droped selectedCard" + selectedCard);
+                Debug.Log("Card Droped selectedCard GetDroppedCardsCount" + leastCountManager.GetDroppedCardsCount());
                 GameFlow();
+
             }
-            else {
+            else
+            {
                 SetMessage("Select a card from your deck and click confirm");
             }
         }
 
         //****************** Animator Event *********************//
-        public void MoveAnimations(byte value,byte deckOrDrawn,byte cardValue) {
+        public void MoveAnimations(byte value, byte deckOrDrawn, byte cardValue)
+        {
             leastCountManager.DropCardsFromPlayer(remotePlayer, remotePlayer.DisplayingCards[0]);
             cardAnimator.DropCardAnimation(remotePlayer.DisplayingCards[0], leastCountManager.GetDroppedCardsCount());
             currentTurnPlayer.DropCardFromPlayer(cardAnimator, value, true);
             leastCountManager.RepositionDroppedCards(cardAnimator);
-            if (deckOrDrawn == 0){
-
+            if (deckOrDrawn == 0)
+            {
                 Card card = leastCountManager.DrawDroppedCard();
                 leastCountManager.AddCardValueToPlayer(currentTurnPlayer.PlayerId, card.GetValue());
                 cardAnimator.DrawDroppedCard(currentTurnPlayer, card);
                 leastCountManager.RepositionDroppedCards(cardAnimator);
             }
-            else {
+            else
+            {
                 cardAnimator.DrawDisplayingCard(currentTurnPlayer, cardValue);
                 leastCountManager.AddCardValueToPlayer(currentTurnPlayer.PlayerId, cardValue);
             }
@@ -529,7 +560,7 @@ namespace QGAMES
         {
             if (propertiesThatChanged.ContainsKey(Constants.INITIALIZING_CARDS))
             {
-                
+
                 Debug.Log("Intializing cards");
                 if (!PhotonNetwork.IsMasterClient)
                 {
@@ -568,7 +599,7 @@ namespace QGAMES
                 int currentPlayerId = move.NextActorNumber;
                 if (justPlayed != PhotonNetwork.LocalPlayer.ActorNumber)
                 {
-                    MoveAnimations(replyDroppedCards, 0,drawnCard);
+                    MoveAnimations(replyDroppedCards, 0, drawnCard);
                 }
 
                 if (currentPlayerId == PhotonNetwork.LocalPlayer.ActorNumber)
@@ -587,6 +618,8 @@ namespace QGAMES
         {
             byte eventCode = photonEvent.Code;
 
+            //Event code 1-- initial distribution of cards
+
             if (eventCode == 1)
             {
                 if (!PhotonNetwork.IsMasterClient)
@@ -599,9 +632,10 @@ namespace QGAMES
 
                     if (reply.ContainsKey(localPlayer.PlayerId))
                     {
-                        foreach (int keys in MyPlayers.Keys) {
+                        foreach (int keys in MyPlayers.Keys)
+                        {
                             leastCountManager.AddCardValuesToPlayer(keys.ToString(), reply[keys.ToString()].ToList());
-                        }                        
+                        }
                         leastCountManager.SetPoolOfCards((List<byte>)reply["poolOfCards"].ToList());
                         leastCountManager.AddCardToDroppedCards(reply[Constants.INITIALIZING_DROPPEDCARD][0]);
                         intializing = true;
@@ -611,7 +645,8 @@ namespace QGAMES
                     }
                 }
             }
-            else if (eventCode == 2) {
+            else if (eventCode == 2)
+            {
 
                 Dictionary<string, byte> move = (Dictionary<string, byte>)photonEvent.CustomData;
                 int justPlayed = Convert.ToInt32(move["CurrentActorNumber"]);
@@ -631,7 +666,8 @@ namespace QGAMES
                     GameFlow();
 
                 }
-                else {
+                else
+                {
                     currentTurnPlayer = remotePlayer;
                     gameState = GameState.TurnSelectingDroppingCard;
                     GameFlow();

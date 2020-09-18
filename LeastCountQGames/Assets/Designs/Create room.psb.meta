@@ -726,7 +726,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1635
     mosaicPosition: {x: 0, y: 0}
   - name: camera-back
@@ -740,7 +740,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1646
     mosaicPosition: {x: 0, y: 0}
   - name: stack
@@ -754,7 +754,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 2
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1648
     mosaicPosition: {x: 0, y: 0}
   - name: Rounded Rectangle 11 copy 2
@@ -782,7 +782,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 2
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1650
     mosaicPosition: {x: 0, y: 0}
   - name: Rounded Rectangle 11
@@ -845,7 +845,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1668
     mosaicPosition: {x: 0, y: 0}
   - name: Join
@@ -866,7 +866,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1656
     mosaicPosition: {x: 0, y: 0}
   - name: Play With Computer copy
@@ -880,7 +880,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1638
     mosaicPosition: {x: 0, y: 0}
   - name: Vector Icon
@@ -894,7 +894,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1644
     mosaicPosition: {x: 0, y: 0}
   - name: SELECT LOBBY
@@ -908,7 +908,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1680
     mosaicPosition: {x: 0, y: 0}
   - name: Create
@@ -929,7 +929,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1640
     mosaicPosition: {x: 0, y: 0}
   - name: Create
@@ -950,7 +950,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1642
     mosaicPosition: {x: 0, y: 0}
   - name: Join
@@ -971,7 +971,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1654
     mosaicPosition: {x: 0, y: 0}
   - name: Path 2
@@ -992,7 +992,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1565
     mosaicPosition: {x: 0, y: 0}
   - name: Rectangle 1

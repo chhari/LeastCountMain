@@ -660,14 +660,14 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1656
     mosaicPosition: {x: 0, y: 0}
   - name: crown icon
     spriteName: 
     isGroup: 1
     parentIndex: 0
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1438
     mosaicPosition: {x: 0, y: 0}
   - name: crown (1)
@@ -681,7 +681,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 0
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1440
     mosaicPosition: {x: 0, y: 0}
   - name: settings
@@ -709,7 +709,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 0
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1444
     mosaicPosition: {x: 0, y: 0}
   - name: user
@@ -723,7 +723,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 0
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1442
     mosaicPosition: {x: 0, y: 0}
   - name: speech-bubble (1)
@@ -786,7 +786,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1466
     mosaicPosition: {x: 0, y: 0}
   - name: Rounded Rectangle 2
@@ -807,14 +807,14 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1430
     mosaicPosition: {x: 0, y: 0}
   - name: Back arrow
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1817
     mosaicPosition: {x: 0, y: 0}
   - name: camera-back
@@ -835,7 +835,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1812
     mosaicPosition: {x: 0, y: 0}
   - name: Rectangle copy

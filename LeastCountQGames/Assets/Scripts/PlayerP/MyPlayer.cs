@@ -24,13 +24,16 @@ namespace QGAMES
 
         public Vector2 NextCardPosition()
         {
+            Debug.Log("position" + Position);
             Vector2 nextPos = Position + Vector2.right * Constants.PLAYER_CARD_POSITION_OFFSET * DisplayingCards.Count;
+            Debug.Log("Next position" + nextPos);
             return nextPos;
         }
 
         public Vector2 NextBookPosition()
         {
             Vector2 nextPos = BookPosition + Vector2.right * Constants.PLAYER_BOOK_POSITION_OFFSET * NumberOfBooks;
+            Debug.Log("Next Book position" + BookPosition);
             return nextPos;
         }
 
@@ -38,7 +41,7 @@ namespace QGAMES
         {
             Vector2 targetPosition = NextBookPosition();
             List<Card> displayingCardsToRemove = new List<Card>();
-
+            Debug.Log("Book targetPosition" + targetPosition);
             foreach (Card card in DisplayingCards)
             {
                 if (card.Rank == rank)
@@ -98,11 +101,12 @@ namespace QGAMES
         public void RepositionDisplayingCards(CardAnimator cardAnimator)
         {
             NumberOfDisplayingCards = 0;
-            for (int i = 0;i < DisplayingCards.Count;i++)
+            for (int i = 0; i < DisplayingCards.Count; i++)
             {
                 NumberOfDisplayingCards++;
-                Vector2 nextPos = Position + Vector2.right * Constants.PLAYER_CARD_POSITION_OFFSET * (i+1);
+                Vector2 nextPos = Position + Vector2.right * Constants.PLAYER_CARD_POSITION_OFFSET * (i + 1);
                 cardAnimator.AddCardAnimation(DisplayingCards[i], nextPos);
+                Debug.Log("cardAnimator Next position Card" + nextPos);
             }
         }
 
@@ -140,7 +144,7 @@ namespace QGAMES
                     card.SetFaceUp(true);
                 }
 
-                if(card != null)
+                if (card != null)
                 {
                     DisplayingCards.Remove(card);
                     receivingPlayer.ReceiveDisplayingCard(card);
@@ -159,36 +163,36 @@ namespace QGAMES
         {
             int playerDisplayingCardsCount = DisplayingCards.Count;
 
-                Card card = null;
-                if (isLocalPlayer)
+            Card card = null;
+            if (isLocalPlayer)
+            {
+                foreach (Card c in DisplayingCards)
                 {
-                    foreach (Card c in DisplayingCards)
+                    if (c.Rank == Card.GetRank(cardValue) && c.Suit == Card.GetSuit(cardValue))
                     {
-                        if (c.Rank == Card.GetRank(cardValue) && c.Suit == Card.GetSuit(cardValue))
-                        {
-                            card = c;
-                            break;
-                        }
+                        card = c;
+                        break;
                     }
                 }
-                else
-                {
-                    //computer di rasesatppudu ra
-                    card = DisplayingCards[playerDisplayingCardsCount - 1];
-                    card.SetCardValue(cardValue);
-                    card.SetFaceUp(true);
-                }
+            }
+            else
+            {
+                //computer di rasesatppudu ra
+                card = DisplayingCards[playerDisplayingCardsCount - 1];
+                card.SetCardValue(cardValue);
+                card.SetFaceUp(true);
+            }
 
-                if (card != null)
-                {
-                    DisplayingCards.Remove(card);
-                    //cardAnimator.AddCardAnimation(card, receivingPlayer.NextCardPosition());
-                    NumberOfDisplayingCards--;
-                }
-                else
-                {
-                    Debug.LogError("Unable to find displaying card.");
-                }
+            if (card != null)
+            {
+                DisplayingCards.Remove(card);
+                //cardAnimator.AddCardAnimation(card, receivingPlayer.NextCardPosition());
+                NumberOfDisplayingCards--;
+            }
+            else
+            {
+                Debug.LogError("Unable to find displaying card.");
+            }
             RepositionDisplayingCards(cardAnimator);
 
             return card;

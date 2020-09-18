@@ -330,7 +330,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 93
     mosaicPosition: {x: 0, y: 0}
   - name: GAMES
@@ -372,7 +372,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 0
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 112
     mosaicPosition: {x: 0, y: 0}
   - name: Layer 3
@@ -400,14 +400,14 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 90
     mosaicPosition: {x: 0, y: 0}
   - name: Background
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 110
     mosaicPosition: {x: 0, y: 0}
   - name: Rectangle 1

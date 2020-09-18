@@ -541,7 +541,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1655
     mosaicPosition: {x: 0, y: 0}
   - name: camera-back
@@ -562,7 +562,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1659
     mosaicPosition: {x: 0, y: 0}
   - name: Player1
@@ -632,7 +632,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1565
     mosaicPosition: {x: 0, y: 0}
   - name: Color Fill 1

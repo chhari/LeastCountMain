@@ -11,6 +11,8 @@ namespace QGAMES
     {
         // Start is called before the first frame update
         public TextMeshProUGUI player_name;
+        public GameObject loadingscreen;
+        
 
         void Awake()
         {
@@ -25,9 +27,18 @@ namespace QGAMES
             
         }
 
-        
-        public void onPlayWithFriendsButton() {            
+        public void EnableLoadingScreen()
+        {
+            loadingscreen.GetComponent<SpriteRenderer>().sortingOrder = 50;
+        }
+        public void DisableLoadingScreen()
+        {
+            loadingscreen.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        }
+        public void onPlayWithFriendsButton() {    
+            EnableLoadingScreen();     
             SceneManager.LoadScene(Loader.Scene.CreateRoomScreen.ToString());
+            // DisableLoadingScreen();
         }
 
         // Update is called once per frame

@@ -242,7 +242,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1644
     mosaicPosition: {x: 0, y: 0}
   - name: Enter private code here...
@@ -263,7 +263,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1546
     mosaicPosition: {x: 0, y: 0}
   - name: Status baar
@@ -291,7 +291,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 1642
     mosaicPosition: {x: 0, y: 0}
   - name: ENTER PRIVATE CODE

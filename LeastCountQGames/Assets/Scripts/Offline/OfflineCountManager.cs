@@ -173,6 +173,7 @@ namespace QGAMES
             for(int i=0;i< DroppedCards.Count;i++)
             {
                 Vector2 newPos =  cardAnimator.droppedCardPosition + Vector2.right * Constants.PLAYER_CARD_POSITION_OFFSET * i;
+                Debug.Log("Card drop position in offline new" + newPos);
                 cardAnimator.AddCardAnimation(DroppedCards[i], newPos);
             }
         }

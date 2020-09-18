@@ -9,6 +9,7 @@ namespace QGAMES
     [Serializable]
     public class CardSelectedEvent : UnityEvent<Card>
     {
+        
     }
 
     public class MouseActions : MonoBehaviour
@@ -19,8 +20,9 @@ namespace QGAMES
         {
             if (Input.GetMouseButtonUp(0))
             {
+                Debug.Log("Geting card");
                 Card card = MouseOverCard();
-
+                // Debug.Log("Geting card" + card.Value);
                 if (card != null)
                 {
                     OnCardSelected.Invoke(card);
