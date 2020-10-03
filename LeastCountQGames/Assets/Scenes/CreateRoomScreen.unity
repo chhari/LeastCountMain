@@ -464,8 +464,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d18cc9206168c9498daf798d3d4f00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanvasBackground: {fileID: 0}
-  CanvasForeground: {fileID: 0}
+  CanvasBackground: {fileID: 2521707073285748475}
+  CanvasForeground: {fileID: 6711803987089287295}
   JoinRoom: {fileID: 1742500319}
   JoinRoomInputFeild: {fileID: 740482322}
 --- !u!4 &95615455

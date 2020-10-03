@@ -495,7 +495,7 @@ namespace QGAMES
         //to drop card
         public void ConfirmDropButton()
         {
-            Debug.Log("Drop button clicked");
+            // Debug.Log("Drop button clicked");
             if (selectedCard != null || selectedCards != null)
             {
                 foreach (Card selCard in selectedCards)
@@ -508,9 +508,9 @@ namespace QGAMES
                 leastCountManager.RepositionDroppedCards(cardAnimator);
                 move.droppedCards = selectedCard.GetValue();
                 gameState = GameState.TurnConfirmDroppingCard;
-                Debug.Log("Card Droped");
-                Debug.Log("Card Droped selectedCard" + selectedCard);
-                Debug.Log("Card Droped selectedCard GetDroppedCardsCount" + leastCountManager.GetDroppedCardsCount());
+                // Debug.Log("Card Droped");
+                // Debug.Log("Card Droped selectedCard" + selectedCard);
+                // Debug.Log("Card Droped selectedCard GetDroppedCardsCount" + leastCountManager.GetDroppedCardsCount());
                 GameFlow();
 
             }

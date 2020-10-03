@@ -18,11 +18,17 @@ namespace QGAMES
         private Dictionary<int, GameObject> playerListEntries;
 
         public Image player1Im;
-        public GameObject player2Im;
-        public GameObject player3Im;
-        public GameObject player4Im;
-        public GameObject player5Im;
-        public GameObject player6Im;
+        public Image player2Im;
+        public Image player3Im;
+        public Image player4Im;
+        public Image player5Im;
+        public Image player6Im;
+        public TMP_Text player1Name;
+        public TMP_Text player2Name;
+        public TMP_Text player3Name;
+        public TMP_Text player4Name;
+        public TMP_Text player5Name;
+        public TMP_Text player6Name;
 
 
         private void Awake()
@@ -64,7 +70,8 @@ namespace QGAMES
                 Debug.Log(input);
                 JoinRoom(input);
             }
-            else if (result == Constants.JOINRANDOM) {
+            else if (result == Constants.JOINRANDOM)
+            {
                 OnJoinRandomRoomInput();
             }
         }
@@ -97,8 +104,8 @@ namespace QGAMES
 
         public void JoinRoom(string input)
         {
-
-            ShowNotification("Joining Room "+ input);
+            ShowNotification("Joining Room " + input);
+            Debug.Log("Joining Room ");
             ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable
             {
                 {Constants.PLAYER_AVATAR, PlayerPrefs.GetString(Constants.PLAYER_AVATAR)},
@@ -130,13 +137,13 @@ namespace QGAMES
         {
             object isPlayerName;
             object avatar;
+            Debug.Log("OnPlayerEnteredRoom");
             ShowNotification("Player Entered");
             if (newPlayer.CustomProperties.TryGetValue(Constants.PLAYER_NAME, out isPlayerName))
             {
                 newPlayer.CustomProperties.TryGetValue(Constants.PLAYER_AVATAR, out avatar);
                 ShowNotification("Player Entered" + avatar);
-                ShowJoinedPlayer(newPlayer.ActorNumber, (string)avatar);
-
+                ShowJoinedPlayer(newPlayer.ActorNumber, (string)avatar, (string)isPlayerName);
             }
 
         }
@@ -150,24 +157,26 @@ namespace QGAMES
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                Debug.Log("OnPlayerEnteredRoom");
+                Debug.Log("OnCreatedRoom");
                 ShowNotification("Room Created");
                 ShowCode();
                 //ShowReadyOnePlayer();
-
             }
         }
 
-        public void ShowCode() {
+        public void ShowCode()
+        {
             RoomCode.text = roomCodeInt.ToString();
             shareButton.SetActive(true);
         }
 
-        public void ShowNotification(string Text) {
+        public void ShowNotification(string Text)
+        {
             NotificationText.text = Text;
         }
 
-        public void onClickShareButton() {
+        public void onClickShareButton()
+        {
             if (shareButton.activeSelf)
             {
                 new NativeShare().SetSubject(roomCodeInt.ToString()).SetText("Have fun playing least count").Share();
@@ -175,64 +184,69 @@ namespace QGAMES
         }
 
         public void onBackButtonClicked()
-        { 
-
-            PhotonNetwork.LeaveRoom();            
+        {
+            PhotonNetwork.LeaveRoom();
         }
 
         public override void OnJoinedRoom()
         {
-            
             if (playerListEntries == null)
             {
                 playerListEntries = new Dictionary<int, GameObject>();
             }
 
-
             foreach (Player p in PhotonNetwork.PlayerList)
             {
                 object isPlayerName;
                 object avatar;
+                Debug.Log("OnJoinedRoom");
                 if (p.CustomProperties.TryGetValue(Constants.PLAYER_NAME, out isPlayerName))
                 {
                     p.CustomProperties.TryGetValue(Constants.PLAYER_AVATAR, out avatar);
-                    ShowJoinedPlayer(p.ActorNumber,(string) avatar);
+                    ShowJoinedPlayer(p.ActorNumber, (string)avatar, (string)isPlayerName);
 
                 }
             }
-
         }
 
-       
-        void ShowJoinedPlayer(int pNo,string avatar) {
+        void ShowJoinedPlayer(int pNo, string avatar, string pName)
+        {
             string avName = "avatars/avatars0" + avatar;
-            if (pNo == 1) {
-                player1Im.GetComponent<Image>().sprite = Resources.Load<Sprite>(avName);
+            if (pNo == 1)
+            {
+                player1Im.sprite = Resources.Load<Sprite>(avName);
+                player1Name.text = pName;
             }
             else if (pNo == 2)
             {
-                player2Im.GetComponent<Image>().sprite = Resources.Load<Sprite>(avName);
+                player2Im.sprite = Resources.Load<Sprite>(avName);
+                player2Name.text = pName;
             }
             else if (pNo == 3)
             {
-                player3Im.GetComponent<Image>().sprite = Resources.Load<Sprite>(avName);
+                player3Im.sprite = Resources.Load<Sprite>(avName);
+                player3Name.text = pName;
             }
             else if (pNo == 4)
             {
-                player4Im.GetComponent<Image>().sprite = Resources.Load<Sprite>(avName);
+                player4Im.sprite = Resources.Load<Sprite>(avName);
+                player4Name.text = pName;
             }
             else if (pNo == 5)
             {
-                player5Im.GetComponent<Image>().sprite = Resources.Load<Sprite>(avName);
+                player5Im.sprite = Resources.Load<Sprite>(avName);
+                player5Name.text = pName;
             }
             else if (pNo == 6)
             {
-                player5Im.GetComponent<Image>().sprite = Resources.Load<Sprite>(avName);
+                player5Im.sprite = Resources.Load<Sprite>(avName);
+                player6Name.text = pName;
             }
 
         }
 
-        public void startGameButton() {
+        public void startGameButton()
+        {
 
             if (PhotonNetwork.IsMasterClient)
             {
@@ -244,7 +258,7 @@ namespace QGAMES
             else
             {
                 NotificationText.text = "Only Master can start the game ";
-            }            
+            }
         }
 
 
