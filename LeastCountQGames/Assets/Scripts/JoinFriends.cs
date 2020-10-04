@@ -29,7 +29,7 @@ namespace QGAMES
         public TMP_Text player4Name;
         public TMP_Text player5Name;
         public TMP_Text player6Name;
-
+        private int privateRoomID;
 
         private void Awake()
         {
@@ -83,7 +83,10 @@ namespace QGAMES
                 roomCodeInt = Random.Range(20000, 50000);
                 //NicknameInputField.text = r.ToString();
                 Debug.Log("roomName" + roomCodeInt.ToString());
+                // int number=2;
                 PhotonNetwork.CreateRoom(roomCodeInt.ToString(), new RoomOptions { MaxPlayers = 6 });
+                privateRoomID = roomCodeInt;
+
             }
             else
             {
@@ -112,6 +115,7 @@ namespace QGAMES
                 {Constants.PLAYER_NAME,PlayerPrefs.GetString(Constants.PLAYER_NAME)}
             };
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+            Debug.Log(Constants.PLAYER_NAME);
             PhotonNetwork.JoinRoom(input);
         }
 
@@ -147,6 +151,8 @@ namespace QGAMES
             }
 
         }
+
+        
 
         public override void OnCreateRoomFailed(short returnCode, string message)
         {
@@ -202,9 +208,10 @@ namespace QGAMES
                 Debug.Log("OnJoinedRoom");
                 if (p.CustomProperties.TryGetValue(Constants.PLAYER_NAME, out isPlayerName))
                 {
+                    Debug.Log("OnJoinedRoom CustomProperties");
                     p.CustomProperties.TryGetValue(Constants.PLAYER_AVATAR, out avatar);
                     ShowJoinedPlayer(p.ActorNumber, (string)avatar, (string)isPlayerName);
-
+                    Debug.Log("Player name" + isPlayerName);
                 }
             }
         }

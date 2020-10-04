@@ -83,9 +83,10 @@ namespace QGAMES
             {
                 MyPlayer aplayer = new MyPlayer();
                 aplayer.PlayerId = p.ActorNumber.ToString();
-                aplayer.PlayerName = p.NickName;
+                aplayer.PlayerName = "declearation";
                 Debug.Log("Player p1" + p.ActorNumber);
-                Debug.Log("Player p" + PhotonNetwork.LocalPlayer.ActorNumber);
+                Debug.Log("Player name" + aplayer.PlayerName + "Nickname" + p.NickName);
+                // Debug.Log("Player p" + PhotonNetwork.LocalPlayer.ActorNumber);
                 int pos = CaluclatePositions(p.ActorNumber, PhotonNetwork.LocalPlayer.ActorNumber);
                 if (pos == 0)
                 {

@@ -12,7 +12,7 @@ namespace QGAMES
         // Start is called before the first frame update
         public TextMeshProUGUI player_name;
         public GameObject loadingscreen;
-        
+
 
         void Awake()
         {
@@ -20,35 +20,35 @@ namespace QGAMES
             {
                 SetPreferences();
             }
-            else {
+            else
+            {
                 string PlayerName = PlayerPrefs.GetString(Constants.PLAYER_NAME);
                 player_name.text = PlayerName;
             }
-            
-        }
 
+        }
+        void Start()
+        {
+            DisableLoadingScreen();
+        }
         public void EnableLoadingScreen()
         {
-            loadingscreen.GetComponent<SpriteRenderer>().sortingOrder = 50;
+            loadingscreen.SetActive(true);
         }
         public void DisableLoadingScreen()
         {
-            loadingscreen.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            loadingscreen.SetActive(false);
         }
-        public void onPlayWithFriendsButton() {    
-            EnableLoadingScreen();     
+        public void onPlayWithFriendsButton()
+        {
+            EnableLoadingScreen();
             SceneManager.LoadScene(Loader.Scene.CreateRoomScreen.ToString());
             // DisableLoadingScreen();
         }
 
-        // Update is called once per frame
-        void Update()
+        void SetPreferences()
         {
-
-        }
-
-        void SetPreferences() {
-            PlayerPrefs.SetString(Constants.PLAYER_NAME, "HARI");            
+            PlayerPrefs.SetString(Constants.PLAYER_NAME, "HARI");
             player_name.text = "HARI";
 
         }

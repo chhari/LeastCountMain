@@ -11,7 +11,7 @@ namespace QGAMES
     public class MyPlayer : IEquatable<MyPlayer>
     {
         public string PlayerId;
-        public string PlayerName;
+        public string PlayerName = "Initial decleration";
         public bool IsAI;
         public bool IsLocalPlayer;
         public Vector2 Position;
